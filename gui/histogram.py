@@ -44,6 +44,7 @@ class HistWidget(ToolWidget):
         self.end_slider = ParamSlider([0, 255], 8, 255, bold=True)
 
         channels = cv.split(cv.cvtColor(image, cv.COLOR_BGR2RGB))
+        channels = list(channels) #fix https://github.com/GuidoBartoli/sherloq/issues/52
         channels.append(cv.cvtColor(image, cv.COLOR_BGR2GRAY))
         self.hist = [compute_hist(c) for c in channels]
         rows, cols, chans = image.shape
